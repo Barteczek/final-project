@@ -1,0 +1,43 @@
+@import '../../../styles/settings.scss';
+
+.root {
+  display: flex;
+  justify-content: space-between;
+  max-height: 300px;
+
+  .bannerLeft {
+    h1 {
+      margin: auto;
+    }
+  }
+
+  .bannerRight {
+    color: $color-text-dark;
+    .carouselItem {
+
+      &:before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: rgba($color-background-dark, 0.5);
+      }
+
+      h3, p {
+        color: $color-text-bright;
+        text-shadow: 4px 4px 5px $color-background-dark;
+      }
+      
+    }
+    img {
+      height: 300px;
+
+      &:before {
+        content: '';
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+  }
+}

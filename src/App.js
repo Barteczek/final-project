@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import MainLayout from './components/layout/MainLayout/MainLayout';
+
+// import routes
+import { Homepage } from './components/views/Homepage/Homepage';
+import { NotFound } from './components/views/NotFound/NotFound';
+
+
+class App extends React.Component {
+
+  componentDidMount() {
+    const { loadProducts } = this.props;
+    loadProducts();
+    console.log(this)
+  }
+
+  render() {
+    return (
+      <MainLayout>
+          <Switch>
+            <Route path="/" exact component={Homepage} />
+            {/* <Route path="/photo/:id" exact component={Photo} />
+            <Route path="/terms-of-use" exact component={TermsOfUse} />
+            <Route path="/privacy-policy" exact component={PrivacyPolicy} />
+            <Route path="/submit" exact component={Submit} /> */}
+            <Route component={NotFound} />
+          </Switch>
+      </MainLayout>
+    );
+  }
 }
 
 export default App;

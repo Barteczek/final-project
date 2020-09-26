@@ -1,0 +1,24 @@
+@import '../../../styles/settings.scss';
+
+.root {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: $color-background-light;
+  color: $color-text-dark;
+  padding: 10px 20px;
+  align-items: center;
+  
+  a {
+    padding: 15px;
+    font-size: 0.8rem;
+
+    &:hover {
+      color: darken($color-text-dark, 20);
+    }
+  }
+ 
+  .socialMedia {
+    grid-column-start: 3;
+    justify-self: right;
+  }
+}
