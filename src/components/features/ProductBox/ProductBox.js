@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from "react-router-dom";
 
 import clsx from 'clsx';
 
@@ -8,17 +9,28 @@ import clsx from 'clsx';
 
 import styles from './ProductBox.module.scss';
 
-const Component = ({className, children}) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>ProductBox</h2>
-    {children}
-  </div>
-);
+const Component = ({className, children, name, price, images, _id}) => {
+
+  const history = useHistory();
+
+  return (
+    <div className={clsx(className, styles.root)} onClick={() => history.push(`/products/${_id}`)}>
+      <img src={images[0]} alt={name}></img>
+      <h3>{name}</h3>
+      <h5>from ${price}</h5>
+      {children}
+    </div>
+  )
+};
 
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-};
+  name: PropTypes.string,
+  price: PropTypes.number,
+  images: PropTypes.array,
+  _id: PropTypes.string,
+  };
 
 // const mapStateToProps = state => ({
 //   someProp: reduxSelector(state),

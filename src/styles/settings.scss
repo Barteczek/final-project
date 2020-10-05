@@ -4,7 +4,8 @@ $color-text-bright: #fff;
 $color-primary: #3498db;
 $color-secondary: #218c74;
 $color-background: #21252c;
-$color-background-light: #fff;
+$color-background-light: #ecf0f1;
+$color-background-bright: #fff;
 $color-background-dark: #000;
 
 $color-success: #01916d;
@@ -36,3 +37,8 @@ $transition: all 0.5s;
     @content;
   }
 }
+
+/* RWD BREAKPOINTS */
+$mobile-breakpoint: 575px;
+$tablet-breakpoint: 787px;
+$desktop-breakpoint: 991px;

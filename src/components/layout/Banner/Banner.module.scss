@@ -3,11 +3,37 @@
 .root {
   display: flex;
   justify-content: space-between;
-  max-height: 300px;
 
   .bannerLeft {
+    margin-right: 20px;
+
     h1 {
       margin: auto;
+    }
+
+    form {
+      color: darken($color-text-light, 20);
+
+      h5 {
+      margin: 35px 0 15px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      }
+
+      input, button {
+        background-color: inherit;
+        border: none;
+        border-bottom: 1px solid $color-textfield-border;
+        color: inherit;
+      }
+
+      button {
+        cursor: pointer;
+
+        &:hover {
+          color: $color-text-light;
+        }
+      }
     }
   }
 
@@ -30,7 +56,9 @@
       
     }
     img {
+      width: 500px;
       height: 300px;
+      
 
       &:before {
         content: '';
@@ -38,6 +66,23 @@
         width: 100%;
       }
     }
+  }
+}
 
+/* MEDIA */
+
+@media(max-width: $desktop-breakpoint) {
+  .root {
+    flex-wrap: wrap;
+
+    .bannerRight {
+      margin-top: 50px;
+      width: 100%;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
   }
 }

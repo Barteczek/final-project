@@ -1,7 +1,7 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  background-color: $color-background-light;
+  background-color: $color-background-bright;
   color: $color-text-dark;
   padding: 5px 20px;
   
@@ -31,6 +31,24 @@
 
       &:hover {
         border-bottom: 2px solid $color-text-dark;
+      }
+    }
+  }
+}
+
+/* MEDIA */
+
+@media(max-width: $tablet-breakpoint) {
+  .root {
+    .links {
+      display: none;
+    }
+
+    nav {
+      grid-template-columns: 4fr 1fr;
+
+      .logo {
+        justify-self: left;
       }
     }
   }

@@ -13,7 +13,6 @@ import styles from './Homepage.module.scss';
 
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Homepage</h2>
     <Banner />
     <ProductList />
     {children}

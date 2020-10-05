@@ -38,6 +38,21 @@ export const fetchProducts = () => {
   }
 };
 
+export const fetchProductById = (id) => {
+  return async dispatch => {
+    dispatch(fetchStarted());
+
+    try {
+      let res = await axios.get(`http://localhost:8000/api/products/${id}`);
+
+      dispatch(fetchSuccess(res.data));
+    }
+    catch(err) {
+      dispatch(fetchError(err.message || true));
+    }
+  };
+};
+
 /* INITIAL STATE */
 
 const initialState = {
