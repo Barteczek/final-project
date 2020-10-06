@@ -65,7 +65,6 @@ const Component = ({className, children, products}) => {
             <i class='fas fa-arrow-right'></i>
           </button>
         </form>  
-        
       </div>
       <div className={styles.bannerRight}>
         <Carousel

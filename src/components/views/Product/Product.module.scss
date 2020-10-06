@@ -1,4 +1,129 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 30px;
+
+  .productLeft {
+    background-color: $color-background-light;
+
+    .miniaturesWrapper {
+      display: flex;
+      
+      .miniature {
+        width: 25%;
+        position: relative;
+        cursor: pointer;
+
+        &__fade {
+          &:after {
+          content: '';
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: rgba($color-background-dark, 0.4);
+          position: absolute;
+          top: 0;
+          }
+        }
+
+        &:hover::after {
+          display: none;
+        }
+
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .mainImg {
+      height: 400px;
+    }
+  }
+
+  .productRight {
+    padding: 0 20px;
+    
+    h2 {
+      text-align: center;
+    }
+
+    p {
+      margin: 20px 8px 10px;
+    }
+
+    h5 {
+      padding: 5px 10px;
+      display: inline-block;
+      background-color: $color-background-light;
+      color: $color-text-dark;
+      border-radius: $radius;
+    }
+
+    .cartSection {
+      display: grid;
+      grid-template-columns: 30px auto;
+      grid-template-rows: 1fr 1fr 1fr;
+      margin-top: 30px;
+      margin-left: 8px;
+      justify-items: center;
+      align-items: center;
+
+      button {
+        border: none;
+        background-color: inherit;
+        color: inherit;
+      }
+
+      input {
+        width: 100%;
+        text-align: center;
+        border: none;
+        border-radius: $radius;
+      }
+      
+      .cart {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 4;
+        border: none;
+        justify-self: left;
+        background-color: $color-background-light;
+        color: $color-text-dark;
+        border-radius: $radius;
+        padding: 5px 10px;
+        font-size: 1.2rem;
+        margin-left: 15px;
+
+        i {
+          padding: 0 10px 0 15px;
+        }
+
+        &:hover {
+          cursor: pointer;
+          box-shadow: $shadow-light;
+          color: darken($color-text-dark, 20);
+          background-color: lighten($color-background-light, 20);
+        }
+      }
+    }
+  }
+}
+
+/* MEDIA */ 
+
+@media(max-width: $tablet-breakpoint) {
+  .root {
+    grid-template-columns: 1fr;
+  }
+
+  .productRight {
+    margin: 20px 0;
+  }
+}

@@ -8,7 +8,7 @@
   color: $color-text-dark;
   cursor: pointer;
   border-radius: $radius;
-  box-shadow: 0px 0px 7px 0px $color-background-bright;
+  box-shadow: $shadow-light;
   position: relative;
 
   img {
