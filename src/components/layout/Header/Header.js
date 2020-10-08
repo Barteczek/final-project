@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import { connect } from 'react-redux';
+import { getCount } from '../../../redux/cartRedux.js';
 
 import styles from './Header.module.scss';
 
-const Component = ({className, children}) => (
+const Component = ({className, children, cartCount}) => (
   <div className={clsx(className, styles.root)}>
     <nav>
       <div className={styles.links}>
@@ -21,6 +21,7 @@ const Component = ({className, children}) => (
       </a>
       <a href='/cart' className={styles.cart}>
         <i class="fas fa-shopping-basket"></i>
+        <span className={cartCount === 0 ? styles.hide : null}>{cartCount}</span>
       </a>
     </nav>
     {children}
@@ -30,20 +31,21 @@ const Component = ({className, children}) => (
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  cartCount: PropTypes.number,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+  cartCount: getCount(state),
+});
 
 // const mapDispatchToProps = dispatch => ({
 //   someAction: arg => dispatch(reduxActionCreator(arg)),
 // });
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps)(Component);
 
 export {
-  Component as Header,
-  // Container as Header,
+  // Component as Header,
+  Container as Header,
   Component as HeaderComponent,
 };

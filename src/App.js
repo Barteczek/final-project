@@ -8,13 +8,14 @@ import MainLayout from './components/layout/MainLayout/MainLayout';
 import { Homepage } from './components/views/Homepage/Homepage';
 import { NotFound } from './components/views/NotFound/NotFound';
 import { Product } from './components/views/Product/Product';
+import { Cart } from './components/views/Cart/Cart';
 
 class App extends React.Component {
 
   componentDidMount() {
-    const { loadProducts } = this.props;
+    const { loadProducts, getCart } = this.props;
     loadProducts();
-    console.log(this)
+    getCart();
   }
 
   render() {
@@ -23,8 +24,8 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={Homepage} />
             <Route path="/products/:id" exact component={Product} />
-            {/* <Route path="/terms-of-use" exact component={TermsOfUse} />
-            <Route path="/privacy-policy" exact component={PrivacyPolicy} />
+            <Route path="/cart" exact component={Cart} />
+            {/* <Route path="/privacy-policy" exact component={PrivacyPolicy} />
             <Route path="/submit" exact component={Submit} /> */}
             <Route component={NotFound} />
           </Switch>

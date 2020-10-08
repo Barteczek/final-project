@@ -1,113 +1,77 @@
-import axios from 'axios';
-
 /* selectors */
 export const getAll = ({ cart }) => cart.data;
-export const getCount = ({ cart }) => cart.length;
+export const getCount = ({ cart }) => cart.count;
 
 /* action name creator */
 const reducerName = 'cart';
 const createActionName = name => `app/${reducerName}/${name}`;
 
 /* action types */
-const FETCH_START = createActionName('FETCH_START');
 const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
-const FETCH_ERROR = createActionName('FETCH_ERROR');
-const CHANGE_POST = createActionName('CHANGE_POST');
-const ADD_POST = createActionName('ADD_POST');
 
 /* action creators */
-export const fetchStarted = payload => ({ payload, type: FETCH_START });
 export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
-export const fetchError = payload => ({ payload, type: FETCH_ERROR });
-export const changePost = payload => ({ payload, type: CHANGE_POST });
-export const addPost = payload => ({ payload, type: ADD_POST });
 
 /* thunk creators */
-// export const fetchProducts = () => {
-//   return async (dispatch) => {
-//     dispatch(fetchStarted());
 
-//     try {
-//       let res = await axios.get('http://localhost:8000/api/products');
-//       console.log(res)
-//       dispatch(fetchSuccess(res.data));
-//     }
-//     catch(err) {
-//       dispatch(fetchError(err.message || true));
-//     }
-//   }
-// };
+export const saveCart = (payload) => {
+  return (dispatch, getState) => {
 
-// export const fetchProductById = (id) => {
-//   return async dispatch => {
-//     dispatch(fetchStarted());
+    const newState = getState().cart;
+    const foundIndex = newState.data.findIndex(element => element._id === payload._id);
 
-//     try {
-//       let res = await axios.get(`http://localhost:8000/api/products/${id}`);
+    if(foundIndex >= 0){
+      newState.data[foundIndex].count += payload.count;
+    } else newState.data.push(payload);
 
-//       dispatch(fetchSuccess(res.data));
-//     }
-//     catch(err) {
-//       dispatch(fetchError(err.message || true));
-//     }
-//   };
-// };
+    newState.count += payload.count;
+
+    localStorage.setItem('cart', JSON.stringify(newState));
+    dispatch(fetchSuccess(newState));
+  }
+}
+  
+export const getCart = () => {
+  return (dispatch) => {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+
+    if(cart) dispatch(fetchSuccess(cart));
+  }
+}
+
+export const changeCart = (id, count) => {
+  
+  return (dispatch, getState) => {
+  
+    const newState = getState().cart;
+    const foundIndex = newState.data.findIndex(element => element._id === id);
+
+    newState.count -= newState.data[foundIndex].count
+    newState.count += count;
+
+    newState.data[foundIndex].count = count;
+
+    localStorage.setItem('cart', JSON.stringify(newState));
+    dispatch(fetchSuccess(newState));
+  }
+}
 
 /* INITIAL STATE */
 
 const initialState = {
   data: [],
-  loading: [],
+  count: 0,
 };
 
 /* reducer */
 export const reducer = (statePart = initialState, action = {}) => {
   switch (action.type) {
-    case FETCH_START: {
-      return {
-        ...statePart,
-        loading: {
-          active: true,
-          error: false,
-        },
-      };
-    }
     case FETCH_SUCCESS: {
       return {
         ...statePart,
-        loading: {
-          active: false,
-          error: false,
-        },
-        data: action.payload,
+        data: action.payload.data,
+        count: action.payload.count,
       };
-    }
-    case FETCH_ERROR: {
-      return {
-        ...statePart,
-        loading: {
-          active: false,
-          error: action.payload,
-        },
-      };
-    }
-    case CHANGE_POST: {
-      const {id, title, price, description} = action.payload;
-    
-      const newState = {...statePart};
-      const index = newState.data.findIndex(post => post._id === id);
-      
-      newState.data[index].title = title;
-      newState.data[index].price = price;
-      newState.data[index].description = description;
-      
-      return newState;
-    }
-    case ADD_POST: {
-      const newState = {...statePart};
-      newState.data.push(action.payload);
-      
-      return newState;
     }
     default:
       return statePart;

@@ -1,0 +1,14 @@
+@import '../../../styles/settings.scss';
+
+.root {
+  display: grid;
+  grid-template-columns: 1fr 6fr 2fr 2fr 1fr;
+
+  .miniature {
+    width: 80px;
+
+    img {
+      width: 100%;
+    }
+  }
+}

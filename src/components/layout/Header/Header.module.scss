@@ -18,7 +18,21 @@
 
     .cart {
       justify-self: right;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
+      position: relative;
+
+      span {
+        position: absolute;
+        background-color: $color-background;
+        border-radius: 50%;
+        color: $color-text-light;
+        height: 1.2rem;
+        width: 1.2rem;
+        font-size: 0.9rem;
+        text-align: center;
+        line-height: 1.2rem;
+        left: -12px;
+      }
     }
     
     a:hover {
@@ -33,6 +47,10 @@
         border-bottom: 2px solid $color-text-dark;
       }
     }
+  }
+
+  .hide {
+    display: none;
   }
 }
 

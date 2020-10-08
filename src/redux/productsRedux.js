@@ -29,7 +29,6 @@ export const fetchProducts = () => {
 
     try {
       let res = await axios.get('http://localhost:8000/api/products');
-      console.log(res)
       dispatch(fetchSuccess(res.data));
     }
     catch(err) {

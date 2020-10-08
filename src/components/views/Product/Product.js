@@ -5,10 +5,11 @@ import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 import { getAll, fetchProductById } from '../../../redux/productsRedux.js';
+import { saveCart } from '../../../redux/cartRedux';
 
 import styles from './Product.module.scss';
 
-const Component = ({className, children, product, id, fetchById}) => {
+const Component = ({className, children, product, id, fetchById, addToCart}) => {
 
   const {name, price, images, text } = product;
 
@@ -33,7 +34,6 @@ const Component = ({className, children, product, id, fetchById}) => {
       setCount(count + 1);
     }
     else alert(valueAlert);
-  
   }
 
   const handleDecrease = () => {
@@ -45,10 +45,20 @@ const Component = ({className, children, product, id, fetchById}) => {
 
   const handleChange = (e) => {
     const newValue = parseInt(e.target.value);
-    console.log(typeof(newValue));
     if(typeof(newValue) === 'number' && newValue <= 9 && newValue >= 1) {
       setCount(newValue);
     } else alert(valueAlert);
+  }
+
+  const handleAddToCart = () => {
+    const cartProduct = {
+      _id: product._id,
+      name: product.name,
+      price: product.price,
+      img: product.images[0],
+      count: count,
+    }
+    addToCart(cartProduct);
   }
 
   return (
@@ -75,7 +85,7 @@ const Component = ({className, children, product, id, fetchById}) => {
           <button onClick={handleIncrease}><i class="fas fa-plus"></i></button>
           <input type='text' value={count} onChange={(e) => handleChange(e)}/>
           <button onClick={handleDecrease}><i class="fas fa-minus"></i></button>
-          <button className={styles.cart}>
+          <button className={styles.cart} onClick={handleAddToCart}>
             Add to cart
             <i class="fas fa-shopping-basket"></i>
           </button>
@@ -89,9 +99,10 @@ const Component = ({className, children, product, id, fetchById}) => {
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  product: PropTypes.object,
+  product: PropTypes.any,
   id: PropTypes.string,
   fetchById: PropTypes.func,
+  addToCart: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -101,6 +112,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchById: id => dispatch(fetchProductById(id)),
+  addToCart: product => dispatch(saveCart(product))
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
