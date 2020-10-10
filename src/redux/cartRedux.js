@@ -25,7 +25,7 @@ export const saveCart = (payload) => {
     } else newState.data.push(payload);
 
     newState.count += payload.count;
-
+  
     localStorage.setItem('cart', JSON.stringify(newState));
     dispatch(fetchSuccess(newState));
   }
@@ -39,7 +39,7 @@ export const getCart = () => {
   }
 }
 
-export const changeCart = (id, count) => {
+export const changeCart = (id, count, comment) => {
   
   return (dispatch, getState) => {
   
@@ -50,8 +50,22 @@ export const changeCart = (id, count) => {
     newState.count += count;
 
     newState.data[foundIndex].count = count;
+    newState.data[foundIndex].comment = comment;
 
     localStorage.setItem('cart', JSON.stringify(newState));
+    dispatch(fetchSuccess(newState));
+  }
+}
+
+export const removeProduct = (id) => {
+  
+  return (dispatch, getState) => {
+    const newState = getState().cart;
+    
+    newState.data = newState.data.filter(element => element._id !== id);
+
+    localStorage.setItem('cart', JSON.stringify(newState));
+    
     dispatch(fetchSuccess(newState));
   }
 }

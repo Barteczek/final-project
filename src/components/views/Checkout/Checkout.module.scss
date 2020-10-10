@@ -1,0 +1,14 @@
+@import '../../../styles/settings.scss';
+
+.root {
+
+  .product {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    
+    img {
+      width: 100px;
+    }
+  }
+  
+}

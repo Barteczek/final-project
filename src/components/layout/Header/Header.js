@@ -20,7 +20,7 @@ const Component = ({className, children, cartCount}) => (
         <h3>Personalised Watches</h3>
       </a>
       <a href='/cart' className={styles.cart}>
-        <i class="fas fa-shopping-basket"></i>
+        <i className="fas fa-shopping-basket"></i>
         <span className={cartCount === 0 ? styles.hide : null}>{cartCount}</span>
       </a>
     </nav>

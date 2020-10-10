@@ -82,12 +82,12 @@ const Component = ({className, children, product, id, fetchById, addToCart}) => 
         <p>{text}</p>
         <h5>from ${price}</h5>
         <div className={styles.cartSection}>
-          <button onClick={handleIncrease}><i class="fas fa-plus"></i></button>
+          <button onClick={handleIncrease}><i className='fas fa-plus'></i></button>
           <input type='text' value={count} onChange={(e) => handleChange(e)}/>
-          <button onClick={handleDecrease}><i class="fas fa-minus"></i></button>
+          <button onClick={handleDecrease}><i className='fas fa-minus'></i></button>
           <button className={styles.cart} onClick={handleAddToCart}>
             Add to cart
-            <i class="fas fa-shopping-basket"></i>
+            <i className='fas fa-shopping-basket'></i>
           </button>
         </div>
       </div>

@@ -62,7 +62,7 @@ const Component = ({className, children, products}) => {
             <input type='email' name='email' placeholder='Enter Your Email Address' />
           </label>
           <button type='submit' form='newsletter' value='Submit'>
-            <i class='fas fa-arrow-right'></i>
+            <i className='fas fa-arrow-right'></i>
           </button>
         </form>  
       </div>

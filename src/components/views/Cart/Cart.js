@@ -16,6 +16,12 @@ const Component = ({className, children, cart}) => (
     {cart.map(product => (
       <CartProduct key={product._id} {...product} />
     ))}
+    {cart.length > 0 ? 
+    <a href='/checkout'>
+      <button className={styles.checkoutButton}>
+        Checkout
+      </button> 
+    </a> : null}
     {children}
   </div>
 );

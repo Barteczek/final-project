@@ -14,10 +14,10 @@ const Component = ({className, children}) => (
       <a href='/'>BACK TO TOP</a>
     </div>
     <div className={styles.socialMedia}>
-      <a href='/'><i class="fab fa-facebook-f"></i></a>
-      <a href='/'><i class="fab fa-instagram"></i></a>
-      <a href='/'><i class="fab fa-youtube"></i></a>
-      <a href='/'><i class="fab fa-twitter"></i></a>
+      <a href='/'><i className="fab fa-facebook-f"></i></a>
+      <a href='/'><i className="fab fa-instagram"></i></a>
+      <a href='/'><i className="fab fa-youtube"></i></a>
+      <a href='/'><i className="fab fa-twitter"></i></a>
     </div>
     {children}
   </div>

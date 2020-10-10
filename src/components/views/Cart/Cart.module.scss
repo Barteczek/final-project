@@ -1,6 +1,26 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  background-color: $color-background-light;
-  color: $color-text-dark;
+  background-color: $color-background;
+  color: $color-text-light;
+  padding: 20px 10px;
+
+  h2 {
+    margin-bottom: 30px;
+  }
+
+  .checkoutButton {
+    border: none;
+    background-color: $color-background-bright;
+    color: $color-text-dark;
+    float: right;
+    border-radius: $radius;
+    padding: 5px 10px;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: $shadow-light;
+      color: darken($color-text-dark, 20);
+    }
+  }
 }
