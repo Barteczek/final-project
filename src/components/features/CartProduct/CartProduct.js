@@ -8,17 +8,17 @@ import { changeCart, removeProduct } from '../../../redux/cartRedux.js';
 
 import styles from './CartProduct.module.scss';
 
-const Component = ({className, children, img, name, price, count, _id, updateCart, removeProduct}) => {
+const Component = ({className, children, img, name, price, count, _id, comment, updateCart, removeProduct}) => {
 
   const valueAlert = 'The value should be a number between 1-9';
 
   const [stateCount, setCount] = useState(count);
-  const [showComment, setVisibility] = useState(false);
-  const [comment, setComment] = useState('');
+  const [showComment, setVisibility] = useState(comment ? true : false);
+  const [annotation, setComment] = useState(comment);
 
   useEffect(() => {
-    updateCart(_id, stateCount, comment)
-  }, [updateCart, _id, stateCount, comment]);
+    updateCart(_id, stateCount, annotation)
+  }, [updateCart, _id, stateCount, annotation]);
 
   const handleIncrease = () => {
     if(stateCount < 9 ) {
@@ -81,10 +81,12 @@ const Component = ({className, children, img, name, price, count, _id, updateCar
           <input 
             name='showComment'
             type='checkbox' 
-            onChange={(e) => handleChange(e)}/>
+            onChange={(e) => handleChange(e)}
+            checked={annotation ? 'checked' : null}
+            />
         </label>
         <textarea className={showComment ? '' : styles.hide}
-          value={comment}
+          value={annotation}
           onChange={(e) => handleChange(e)}
           rows={2}
           placeholder='Write Your comment here...'

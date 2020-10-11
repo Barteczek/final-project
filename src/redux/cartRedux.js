@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { API_URL } from '../config';
+
 /* selectors */
 export const getAll = ({ cart }) => cart.data;
 export const getCount = ({ cart }) => cart.count;
@@ -7,10 +10,13 @@ const reducerName = 'cart';
 const createActionName = name => `app/${reducerName}/${name}`;
 
 /* action types */
+const FETCH_START = createActionName('FETCH_START');
 const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
-
+const FETCH_ERROR = createActionName('FETCH_ERROR');
 /* action creators */
+export const fetchStarted = payload => ({ payload, type: FETCH_START });
 export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
+export const fetchError = payload => ({ payload, type: FETCH_ERROR });
 
 /* thunk creators */
 
@@ -70,6 +76,20 @@ export const removeProduct = (id) => {
   }
 }
 
+export const addOrderRequest = (order) => {
+  return async dispatch => {
+
+    try {
+      await axios.post(`${API_URL}/seats`, order);
+      dispatch(fetchSuccess());
+
+    } catch(e) {
+      dispatch(fetchError(e.message || true));
+    }
+
+  };
+};
+
 /* INITIAL STATE */
 
 const initialState = {
@@ -80,11 +100,29 @@ const initialState = {
 /* reducer */
 export const reducer = (statePart = initialState, action = {}) => {
   switch (action.type) {
+    case FETCH_START: {
+      return {
+        ...statePart,
+        loading: {
+          active: true,
+          error: false,
+        },
+      };
+    }
     case FETCH_SUCCESS: {
       return {
         ...statePart,
         data: action.payload.data,
         count: action.payload.count,
+      };
+    }
+    case FETCH_ERROR: {
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: action.payload,
+        },
       };
     }
     default:

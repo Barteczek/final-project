@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_URL } from '../config';
 
 /* selectors */
 export const getAll = ({ products }) => products.data;
@@ -28,7 +29,7 @@ export const fetchProducts = () => {
     dispatch(fetchStarted());
 
     try {
-      let res = await axios.get('http://localhost:8000/api/products');
+      let res = await axios.get(`${API_URL}/products`);
       dispatch(fetchSuccess(res.data));
     }
     catch(err) {
@@ -42,7 +43,7 @@ export const fetchProductById = (id) => {
     dispatch(fetchStarted());
 
     try {
-      let res = await axios.get(`http://localhost:8000/api/products/${id}`);
+      let res = await axios.get(`${API_URL}/products/${id}`);
 
       dispatch(fetchSuccess(res.data));
     }
