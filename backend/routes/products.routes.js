@@ -25,20 +25,4 @@ router.get('/products/:id', async (req, res) => {
   }
 });
 
-// router.post('/posts/add', async (req, res) => {
-//   try {
-//     const { title, text, price } = req.body;
-//     if(title && text && price ){
-//       const newPost = new Post({title: title, text: text, price: price});
-//       await newPost.save();
-//       res.json( newPost );
-//     } else {
-//       res.json({message: 'Please fill all fields!'});
-//     }
-//   }
-//   catch(err) {
-//     res.status(500).json(err);
-//   }
-// });
-
 module.exports = router;

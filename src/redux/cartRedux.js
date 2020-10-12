@@ -80,13 +80,13 @@ export const addOrderRequest = (order) => {
   return async dispatch => {
 
     try {
-      await axios.post(`${API_URL}/seats`, order);
-      dispatch(fetchSuccess());
-
+      await axios.post(`${API_URL}/orders`, order);
+      alert('Thank you for your order. Our Customer Service will contact shortly')
+      localStorage.removeItem('cart');
+      dispatch(fetchSuccess(initialState));
     } catch(e) {
       dispatch(fetchError(e.message || true));
     }
-
   };
 };
 

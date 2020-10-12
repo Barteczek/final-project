@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getAll, addOrderRequest } from '../../../redux/cartRedux.js';
+import { getAll, addOrderRequest, removeProduct } from '../../../redux/cartRedux.js';
 
 import styles from './Checkout.module.scss';
 
@@ -36,12 +36,11 @@ class Component extends React.Component {
 
   handleChange = event => {
     this.setState({[event.target.name]: event.target.value});
-
   }
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
-    const { cart, saveOrder } = this.props;
+    const { cart, saveOrder, history } = this.props;
     const { subtotal, name, surname, email, mobile } = this.state;
 
     const order = {
@@ -52,8 +51,8 @@ class Component extends React.Component {
       subtotal,
       cart,
     }
-
-    saveOrder(order);
+    await saveOrder(order);
+    history.push('/');
   }
 
   render() {
@@ -119,6 +118,7 @@ Component.propTypes = {
   className: PropTypes.string,
   cart: PropTypes.array,
   saveOrder: PropTypes.func,
+  getCart: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -127,6 +127,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   saveOrder: order => dispatch(addOrderRequest(order)),
+  removeProduct: id => dispatch(removeProduct(id))
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
