@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import axios from 'axios';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 import { getAll } from '../../../redux/productsRedux';
+import { API_URL } from '../../../config';
 
 import styles from './Banner.module.scss';
 
@@ -20,6 +21,7 @@ const Component = ({className, children, products}) => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const [email, setEmail] = useState('');
 
   const next = () => {
     if (animating) return;
@@ -52,14 +54,25 @@ const Component = ({className, children, products}) => {
     );
   });
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await axios.post(`${API_URL}/emails`, {email: email})
+      .then(response => alert(response.data.message));
+  }
+
+
+  const handleChange = event => {
+    setEmail(event.target.value);
+  }
+
   return (
     <div className={clsx(className, styles.root, 'container')}>
       <div className={styles.bannerLeft}>
         <h1>The Best Watch Buying Guides Delivered to Your Inbox</h1>
-        <form id='newsletter'>
+        <form id='newsletter' onSubmit={handleSubmit}>
           <label>
             <h5>sign up today</h5>
-            <input type='email' name='email' placeholder='Enter Your Email Address' />
+            <input type='email' name='email' placeholder='Enter Your Email Address' onChange={handleChange}/>
           </label>
           <button type='submit' form='newsletter' value='Submit'>
             <i className='fas fa-arrow-right'></i>

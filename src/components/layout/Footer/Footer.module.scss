@@ -1,12 +1,11 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
   background-color: $color-background-light;
   color: $color-text-dark;
   padding: 10px 20px;
-  align-items: center;
+  justify-content: space-between;
   
   a {
     padding: 15px;
@@ -20,5 +19,12 @@
   .socialMedia {
     grid-column-start: 3;
     justify-self: right;
+  }
+}
+
+/* MEDIA */
+@media(max-width: $tablet-breakpoint) {
+  .root {
+    grid-template-columns: 1fr 1fr;
   }
 }

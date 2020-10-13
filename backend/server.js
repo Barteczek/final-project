@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const productsRoutes = require('./routes/products.routes');
 const ordersRoutes = require('./routes/orders.routes');
+const emailRoutes = require('./routes/emails.routes');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 /* API ENDPOINTS */
 app.use('/api', productsRoutes);
 app.use('/api', ordersRoutes);
+app.use('/api', emailRoutes);
 
 /* API ERROR PAGES */
 app.use('/api', (req, res) => {
@@ -39,5 +41,5 @@ app.use('*', (req, res) => {
 /* START SERVER */
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
-  console.log('Server is running on port: '+port);
+  console.log(`Server is running on port: ${port}`);
 });

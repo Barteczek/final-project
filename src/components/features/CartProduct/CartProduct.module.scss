@@ -79,9 +79,30 @@
     }
   }
   
-
   .hide {
     display: none;
   }
+}
+
+/* MEDIA */
+@media(max-width: $mobile-breakpoint) {
+  .root {
+    grid-template-columns: 1fr 4fr 2fr 3fr 1fr;
+    .miniature {
+      width: 60px;
+      height: 60px;
+    }
+
+    h5 {
+      font-size: 1rem;
+    }
+
+    .countWrapper {
+      font-size: 0.8rem;
   
+      input {
+        width: 15px;
+      }
+    }
+  }
 }
