@@ -62,7 +62,7 @@ const Component = ({className, children, product, id, fetchById, addToCart}) => 
   }
 
   return (
-    <div className={clsx(className, styles.root)}>
+    <div className={clsx(className, styles.root, 'container')}>
       <div className={styles.productLeft}>
         {images ? 
           <div className={styles.mainImg}>
