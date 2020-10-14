@@ -40,7 +40,7 @@ const Component = ({className, children, products}) => {
     setActiveIndex(newIndex);
   }
 
-  const slides = products.map((item) => {
+  const slides = products.length > 0 ? products.map((item) => {
     return (
       <CarouselItem
         onExiting={() => setAnimating(true)}
@@ -52,7 +52,7 @@ const Component = ({className, children, products}) => {
         <CarouselCaption captionText={`from $${item.price}`} captionHeader={item.name} />
       </CarouselItem>
     );
-  });
+  }) : null;
 
   const handleSubmit = async (event) => {
     event.preventDefault();

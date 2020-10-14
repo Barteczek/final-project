@@ -14,12 +14,12 @@ const Component = ({className, children, products}) => (
   <div className={clsx(className, styles.root, 'container')}>
     <h2>Featured Collections</h2>
     <div className={styles.productsWrapper}>
-      {products.map(product => (
+      {products.length > 0 ? products.map(product => (
         <div key={product._id}>
           <ProductBox {...product}/>
         </div>
         
-      ))}
+      )) : <h1>Loading</h1>}
     </div>  
     {children}
   </div>

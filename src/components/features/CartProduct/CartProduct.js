@@ -69,7 +69,7 @@ const Component = ({className, children, img, name, price, count, _id, comment, 
       <div className={styles.priceWrapper}>
         <h5>${price * stateCount}</h5>
         {stateCount > 1 ?
-        <span>${price} per piece</span> : 
+        <span>{stateCount} x ${price}</span> : 
         null}
       </div>
       <button onClick={handleRemove}>

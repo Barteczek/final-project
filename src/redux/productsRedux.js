@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../config';
+import { initialState } from './initialState';
 
 /* selectors */
 export const getAll = ({ products }) => products.data;
@@ -53,15 +54,8 @@ export const fetchProductById = (id) => {
   };
 };
 
-/* INITIAL STATE */
-
-const initialState = {
-  data: [],
-  loading: [],
-};
-
 /* reducer */
-export const reducer = (statePart = initialState, action = {}) => {
+export const reducer = (statePart = initialState.products, action = {}) => {
   switch (action.type) {
     case FETCH_START: {
       return {
